@@ -72,7 +72,37 @@ main { padding: 8px 24px 80px; min-width: 0; }
 #lb .tools { display: flex; gap: 8px; }
 #lb button.t, #lb a.t { background: var(--panel); border: 1px solid var(--line); color: var(--text);
   border-radius: 6px; padding: 5px 10px; font: inherit; font-size: 13px; cursor: pointer; text-decoration: none; white-space: nowrap; }
+/* Refined parts catalog section (index.html only; markup and script from art/refined_kit_05/index.html) */
+#components > h2 { font-size: 22px; margin: 34px 0 4px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+#components > p { color: var(--muted); margin: 6px 0; max-width: 80ch; font-size: 14px; }
+#components .controls { position: sticky; top: 61px; z-index: 5; background: rgba(13,19,28,.94);
+  display: flex; flex-wrap: wrap; gap: 8px 10px; align-items: center; padding: 10px 0; margin-top: 8px; }
+#components .controls input, #components .controls select, #components .controls button { font: inherit; font-size: 14px;
+  background: var(--panel); color: var(--text); border: 1px solid var(--line); border-radius: 6px; padding: 7px 10px; }
+#components .controls button { cursor: pointer; }
+#components .controls button.active { background: var(--panel-2); border-color: var(--accent); }
+#parts-count { color: var(--muted); font-size: 13px; }
+.parts { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
+.parts article { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.parts article[hidden] { display: none; }
+.parts .picture { display: block; background: radial-gradient(ellipse, #2b3b4a, #131c26); }
+.parts .picture img { display: block; width: 100%; aspect-ratio: 4/3; object-fit: contain; }
+.parts .info { padding: 10px 14px 12px; }
+.parts small { color: var(--muted); font-size: 12px; }
+.parts h2 { font-size: 16px; margin: 2px 0; }
+.parts .info p { color: var(--muted); font-size: 12px; margin: 2px 0 8px; }
+.parts .info a { color: var(--accent); font-size: 13px; margin-right: 10px; }
+.parts code { display: block; margin-top: 8px; font-size: 11px; color: var(--legacy); }
+#parts-detail { position: fixed; z-index: 15; pointer-events: none; width: min(600px, calc(100vw - 24px));
+  max-height: calc(100vh - 24px); overflow: hidden; padding: 18px; background: var(--panel-2);
+  border: 1px solid var(--accent); border-radius: 12px; box-shadow: 0 16px 60px #0009; }
+#parts-detail[hidden] { display: none; }
+#parts-detail img { display: block; width: 100%; height: min(420px, calc(100vh - 150px)); object-fit: contain; }
+#parts-detail h2 { font-size: 18px; margin: 12px 0 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#parts-detail p { color: var(--muted); font-size: 12px; margin: 0; }
 @media (max-width: 800px) {
+  #components .controls { top: 0; position: static; }
+  .parts { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
   .layout { grid-template-columns: 1fr; }
   nav { display: none; }
   main { padding: 4px 16px 60px; }
@@ -92,7 +122,483 @@ main { padding: 8px 24px 80px; min-width: 0; }
 </header>
 <div class="layout">
   <nav id="nav" aria-label="Collections"></nav>
-  <main id="main"><div id="empty" class="hidden">Nothing matches.</div></main>
+  <main id="main"><div id="empty" class="hidden">Nothing matches.</div><div id="groups"></div><section id="components"><h2>Components</h2><p>113 selected components. Ivory crew hulls, navy structure, steel machinery and selective amber hardware. The four approved refinements anchor the family pass.</p><p>Connection points, outer dimensions and saved-ship IDs are preserved. The cargo family adds construction details inside the original collision hulls. “Shared scale” compares real dimensions; “Detail” fits each component to its card.</p><p>Hover over a part or focus its image for an enlarged detail. Press Escape to dismiss; click the image to open the full detail.</p><div class="controls"><input id="parts-search" placeholder="Search parts or IDs" aria-label="Search parts"><select id="parts-family" aria-label="Part family"><option value="">All families</option><option value="Asteroid foot">Asteroid foot (5)</option><option value="Cargo cassette">Cargo cassette (5)</option><option value="Docking collar">Docking collar (5)</option><option value="Engine mounting connectors">Engine mounting connectors (1)</option><option value="Equipment bays">Equipment bays (4)</option><option value="Extended solar panels">Extended solar panels (15)</option><option value="Habitats">Habitats (3)</option><option value="Large lattice trusses">Large lattice trusses (3)</option><option value="Main drives">Main drives (2)</option><option value="Main engine">Main engine (5)</option><option value="Module back plates">Module back plates (8)</option><option value="Octagonal hull adapters">Octagonal hull adapters (2)</option><option value="Open truss / 6 m">Open truss / 6 m (5)</option><option value="Operations capsules">Operations capsules (4)</option><option value="Power / service bay">Power / service bay (5)</option><option value="Power / service bays">Power / service bays (1)</option><option value="Rcs cluster">Rcs cluster (5)</option><option value="S1 trusses and fittings">S1 trusses and fittings (3)</option><option value="Sensor mast">Sensor mast (5)</option><option value="Service collars">Service collars (3)</option><option value="Service drums / power bays">Service drums / power bays (4)</option><option value="Strapped cargo boxes">Strapped cargo boxes (3)</option><option value="Strapped tank">Strapped tank (8)</option><option value="Surface mounts">Surface mounts (5)</option><option value="Tapered adapter">Tapered adapter (4)</option></select><button id="parts-scale" class="active">Detail view</button><span id="parts-count"></span></div><div class="parts"><article data-family="Open truss / 6 m" data-id="truss_6m_a" data-search="box truss truss_6m_a open truss / 6 m">
+<a class="picture" href="img/refined_kit_05/details/truss_6m_a.webp"><img loading="lazy" src="img/refined_kit_05/scaled/truss_6m_a.webp" alt="Box truss"></a>
+<div class="info"><small>Open truss / 6 m</small><h2>Box truss</h2><p>1.4 × 6.0 × 1.4 m · 932 triangles</p>
+<a href="img/refined_kit_05/details/truss_6m_a.webp">Detail</a> <a href="img/refined_kit_05/scaled/truss_6m_a.webp">Shared scale</a>
+<code>truss_6m_a</code></div></article><article data-family="Open truss / 6 m" data-id="truss_6m_b" data-search="triangular spar truss_6m_b open truss / 6 m">
+<a class="picture" href="img/refined_kit_05/details/truss_6m_b.webp"><img loading="lazy" src="img/refined_kit_05/scaled/truss_6m_b.webp" alt="Triangular spar"></a>
+<div class="info"><small>Open truss / 6 m</small><h2>Triangular spar</h2><p>1.3 × 6.0 × 1.4 m · 632 triangles</p>
+<a href="img/refined_kit_05/details/truss_6m_b.webp">Detail</a> <a href="img/refined_kit_05/scaled/truss_6m_b.webp">Shared scale</a>
+<code>truss_6m_b</code></div></article><article data-family="Open truss / 6 m" data-id="truss_6m_c" data-search="twin ladder truss_6m_c open truss / 6 m">
+<a class="picture" href="img/refined_kit_05/details/truss_6m_c.webp"><img loading="lazy" src="img/refined_kit_05/scaled/truss_6m_c.webp" alt="Twin ladder"></a>
+<div class="info"><small>Open truss / 6 m</small><h2>Twin ladder</h2><p>1.5 × 6.0 × 1.3 m · 524 triangles</p>
+<a href="img/refined_kit_05/details/truss_6m_c.webp">Detail</a> <a href="img/refined_kit_05/scaled/truss_6m_c.webp">Shared scale</a>
+<code>truss_6m_c</code></div></article><article data-family="Open truss / 6 m" data-id="truss_6m_d" data-search="service spine truss_6m_d open truss / 6 m">
+<a class="picture" href="img/refined_kit_05/details/truss_6m_d.webp"><img loading="lazy" src="img/refined_kit_05/scaled/truss_6m_d.webp" alt="Service spine"></a>
+<div class="info"><small>Open truss / 6 m</small><h2>Service spine</h2><p>1.3 × 6.0 × 1.3 m · 552 triangles</p>
+<a href="img/refined_kit_05/details/truss_6m_d.webp">Detail</a> <a href="img/refined_kit_05/scaled/truss_6m_d.webp">Shared scale</a>
+<code>truss_6m_d</code></div></article><article data-family="Open truss / 6 m" data-id="truss_6m_e" data-search="ring cage truss_6m_e open truss / 6 m">
+<a class="picture" href="img/refined_kit_05/details/truss_6m_e.webp"><img loading="lazy" src="img/refined_kit_05/scaled/truss_6m_e.webp" alt="Ring cage"></a>
+<div class="info"><small>Open truss / 6 m</small><h2>Ring cage</h2><p>1.4 × 6.0 × 1.4 m · 848 triangles</p>
+<a href="img/refined_kit_05/details/truss_6m_e.webp">Detail</a> <a href="img/refined_kit_05/scaled/truss_6m_e.webp">Shared scale</a>
+<code>truss_6m_e</code></div></article><article data-family="Tapered adapter" data-id="adapter_taper_a" data-search="octagonal taper adapter_taper_a tapered adapter">
+<a class="picture" href="img/refined_kit_05/details/adapter_taper_a.webp"><img loading="lazy" src="img/refined_kit_05/scaled/adapter_taper_a.webp" alt="Octagonal taper"></a>
+<div class="info"><small>Tapered adapter</small><h2>Octagonal taper</h2><p>1.8 × 1.0 × 1.8 m · 396 triangles</p>
+<a href="img/refined_kit_05/details/adapter_taper_a.webp">Detail</a> <a href="img/refined_kit_05/scaled/adapter_taper_a.webp">Shared scale</a>
+<code>adapter_taper_a</code></div></article><article data-family="Tapered adapter" data-id="adapter_taper_b" data-search="conical reducer adapter_taper_b tapered adapter">
+<a class="picture" href="img/refined_kit_05/details/adapter_taper_b.webp"><img loading="lazy" src="img/refined_kit_05/scaled/adapter_taper_b.webp" alt="Conical reducer"></a>
+<div class="info"><small>Tapered adapter</small><h2>Conical reducer</h2><p>2.1 × 1.0 × 2.1 m · 316 triangles</p>
+<a href="img/refined_kit_05/details/adapter_taper_b.webp">Detail</a> <a href="img/refined_kit_05/scaled/adapter_taper_b.webp">Shared scale</a>
+<code>adapter_taper_b</code></div></article><article data-family="Tapered adapter" data-id="adapter_taper_d" data-search="open transition adapter_taper_d tapered adapter">
+<a class="picture" href="img/refined_kit_05/details/adapter_taper_d.webp"><img loading="lazy" src="img/refined_kit_05/scaled/adapter_taper_d.webp" alt="Open transition"></a>
+<div class="info"><small>Tapered adapter</small><h2>Open transition</h2><p>2.1 × 1.0 × 1.8 m · 612 triangles</p>
+<a href="img/refined_kit_05/details/adapter_taper_d.webp">Detail</a> <a href="img/refined_kit_05/scaled/adapter_taper_d.webp">Shared scale</a>
+<code>adapter_taper_d</code></div></article><article data-family="Tapered adapter" data-id="adapter_taper_e" data-search="stepped bulkhead adapter_taper_e tapered adapter">
+<a class="picture" href="img/refined_kit_05/details/adapter_taper_e.webp"><img loading="lazy" src="img/refined_kit_05/scaled/adapter_taper_e.webp" alt="Stepped bulkhead"></a>
+<div class="info"><small>Tapered adapter</small><h2>Stepped bulkhead</h2><p>2.2 × 1.0 × 1.8 m · 356 triangles</p>
+<a href="img/refined_kit_05/details/adapter_taper_e.webp">Detail</a> <a href="img/refined_kit_05/scaled/adapter_taper_e.webp">Shared scale</a>
+<code>adapter_taper_e</code></div></article><article data-family="Main engine" data-id="engine_main_a" data-search="single bell / straight mount engine_main_a main engine">
+<a class="picture" href="img/refined_kit_05/details/engine_main_a.webp"><img loading="lazy" src="img/refined_kit_05/scaled/engine_main_a.webp" alt="Single bell / straight mount"></a>
+<div class="info"><small>Main engine</small><h2>Single bell / straight mount</h2><p>1.8 × 2.6 × 1.8 m · 1,880 triangles</p>
+<a href="img/refined_kit_05/details/engine_main_a.webp">Detail</a> <a href="img/refined_kit_05/scaled/engine_main_a.webp">Shared scale</a>
+<code>engine_main_a</code></div></article><article data-family="Main engine" data-id="engine_main_b" data-search="twin bells / straight mount engine_main_b main engine">
+<a class="picture" href="img/refined_kit_05/details/engine_main_b.webp"><img loading="lazy" src="img/refined_kit_05/scaled/engine_main_b.webp" alt="Twin bells / straight mount"></a>
+<div class="info"><small>Main engine</small><h2>Twin bells / straight mount</h2><p>1.8 × 2.6 × 1.2 m · 2,292 triangles</p>
+<a href="img/refined_kit_05/details/engine_main_b.webp">Detail</a> <a href="img/refined_kit_05/scaled/engine_main_b.webp">Shared scale</a>
+<code>engine_main_b</code></div></article><article data-family="Main engine" data-id="engine_main_c" data-search="quad cluster / straight mount engine_main_c main engine">
+<a class="picture" href="img/refined_kit_05/details/engine_main_c.webp"><img loading="lazy" src="img/refined_kit_05/scaled/engine_main_c.webp" alt="Quad cluster / straight mount"></a>
+<div class="info"><small>Main engine</small><h2>Quad cluster / straight mount</h2><p>1.4 × 2.6 × 1.4 m · 3,252 triangles</p>
+<a href="img/refined_kit_05/details/engine_main_c.webp">Detail</a> <a href="img/refined_kit_05/scaled/engine_main_c.webp">Shared scale</a>
+<code>engine_main_c</code></div></article><article data-family="Main engine" data-id="engine_main_d" data-search="wide vacuum bell / straight mount engine_main_d main engine">
+<a class="picture" href="img/refined_kit_05/details/engine_main_d.webp"><img loading="lazy" src="img/refined_kit_05/scaled/engine_main_d.webp" alt="Wide vacuum bell / straight mount"></a>
+<div class="info"><small>Main engine</small><h2>Wide vacuum bell / straight mount</h2><p>2.1 × 2.6 × 2.1 m · 2,072 triangles</p>
+<a href="img/refined_kit_05/details/engine_main_d.webp">Detail</a> <a href="img/refined_kit_05/scaled/engine_main_d.webp">Shared scale</a>
+<code>engine_main_d</code></div></article><article data-family="Main engine" data-id="engine_main_e" data-search="shrouded drive / straight mount engine_main_e main engine">
+<a class="picture" href="img/refined_kit_05/details/engine_main_e.webp"><img loading="lazy" src="img/refined_kit_05/scaled/engine_main_e.webp" alt="Shrouded drive / straight mount"></a>
+<div class="info"><small>Main engine</small><h2>Shrouded drive / straight mount</h2><p>1.8 × 2.6 × 1.5 m · 1,832 triangles</p>
+<a href="img/refined_kit_05/details/engine_main_e.webp">Detail</a> <a href="img/refined_kit_05/scaled/engine_main_e.webp">Shared scale</a>
+<code>engine_main_e</code></div></article><article data-family="Rcs cluster" data-id="rcs_cluster_a" data-search="five-axis pod rcs_cluster_a rcs cluster">
+<a class="picture" href="img/refined_kit_05/details/rcs_cluster_a.webp"><img loading="lazy" src="img/refined_kit_05/scaled/rcs_cluster_a.webp" alt="Five-axis pod"></a>
+<div class="info"><small>Rcs cluster</small><h2>Five-axis pod</h2><p>0.6 × 0.6 × 0.4 m · 280 triangles</p>
+<a href="img/refined_kit_05/details/rcs_cluster_a.webp">Detail</a> <a href="img/refined_kit_05/scaled/rcs_cluster_a.webp">Shared scale</a>
+<code>rcs_cluster_a</code></div></article><article data-family="Rcs cluster" data-id="rcs_cluster_b" data-search="outrigger jets rcs_cluster_b rcs cluster">
+<a class="picture" href="img/refined_kit_05/details/rcs_cluster_b.webp"><img loading="lazy" src="img/refined_kit_05/scaled/rcs_cluster_b.webp" alt="Outrigger jets"></a>
+<div class="info"><small>Rcs cluster</small><h2>Outrigger jets</h2><p>0.8 × 0.4 × 0.4 m · 536 triangles</p>
+<a href="img/refined_kit_05/details/rcs_cluster_b.webp">Detail</a> <a href="img/refined_kit_05/scaled/rcs_cluster_b.webp">Shared scale</a>
+<code>rcs_cluster_b</code></div></article><article data-family="Rcs cluster" data-id="rcs_cluster_c" data-search="canted quartet rcs_cluster_c rcs cluster">
+<a class="picture" href="img/refined_kit_05/details/rcs_cluster_c.webp"><img loading="lazy" src="img/refined_kit_05/scaled/rcs_cluster_c.webp" alt="Canted quartet"></a>
+<div class="info"><small>Rcs cluster</small><h2>Canted quartet</h2><p>0.6 × 0.6 × 0.3 m · 436 triangles</p>
+<a href="img/refined_kit_05/details/rcs_cluster_c.webp">Detail</a> <a href="img/refined_kit_05/scaled/rcs_cluster_c.webp">Shared scale</a>
+<code>rcs_cluster_c</code></div></article><article data-family="Rcs cluster" data-id="rcs_cluster_d" data-search="armored jet block rcs_cluster_d rcs cluster">
+<a class="picture" href="img/refined_kit_05/details/rcs_cluster_d.webp"><img loading="lazy" src="img/refined_kit_05/scaled/rcs_cluster_d.webp" alt="Armored jet block"></a>
+<div class="info"><small>Rcs cluster</small><h2>Armored jet block</h2><p>0.6 × 0.5 × 0.4 m · 560 triangles</p>
+<a href="img/refined_kit_05/details/rcs_cluster_d.webp">Detail</a> <a href="img/refined_kit_05/scaled/rcs_cluster_d.webp">Shared scale</a>
+<code>rcs_cluster_d</code></div></article><article data-family="Rcs cluster" data-id="rcs_cluster_e" data-search="ring manifold rcs_cluster_e rcs cluster">
+<a class="picture" href="img/refined_kit_05/details/rcs_cluster_e.webp"><img loading="lazy" src="img/refined_kit_05/scaled/rcs_cluster_e.webp" alt="Ring manifold"></a>
+<div class="info"><small>Rcs cluster</small><h2>Ring manifold</h2><p>0.6 × 0.6 × 0.2 m · 652 triangles</p>
+<a href="img/refined_kit_05/details/rcs_cluster_e.webp">Detail</a> <a href="img/refined_kit_05/scaled/rcs_cluster_e.webp">Shared scale</a>
+<code>rcs_cluster_e</code></div></article><article data-family="Extended solar panels" data-id="radiator_wing_a" data-search="tapered solar panel radiator_wing_a extended solar panels">
+<a class="picture" href="img/refined_kit_05/details/radiator_wing_a.webp"><img loading="lazy" src="img/refined_kit_05/scaled/radiator_wing_a.webp" alt="Tapered solar panel"></a>
+<div class="info"><small>Extended solar panels</small><h2>Tapered solar panel</h2><p>3.0 × 1.9 × 0.4 m · 220 triangles</p>
+<a href="img/refined_kit_05/details/radiator_wing_a.webp">Detail</a> <a href="img/refined_kit_05/scaled/radiator_wing_a.webp">Shared scale</a>
+<code>radiator_wing_a</code></div></article><article data-family="Extended solar panels" data-id="radiator_wing_b" data-search="split solar array radiator_wing_b extended solar panels">
+<a class="picture" href="img/refined_kit_05/details/radiator_wing_b.webp"><img loading="lazy" src="img/refined_kit_05/scaled/radiator_wing_b.webp" alt="Split solar array"></a>
+<div class="info"><small>Extended solar panels</small><h2>Split solar array</h2><p>3.1 × 2.0 × 0.4 m · 424 triangles</p>
+<a href="img/refined_kit_05/details/radiator_wing_b.webp">Detail</a> <a href="img/refined_kit_05/scaled/radiator_wing_b.webp">Shared scale</a>
+<code>radiator_wing_b</code></div></article><article data-family="Extended solar panels" data-id="radiator_wing_c" data-search="ladder solar array radiator_wing_c extended solar panels">
+<a class="picture" href="img/refined_kit_05/details/radiator_wing_c.webp"><img loading="lazy" src="img/refined_kit_05/scaled/radiator_wing_c.webp" alt="Ladder solar array"></a>
+<div class="info"><small>Extended solar panels</small><h2>Ladder solar array</h2><p>3.1 × 1.7 × 0.4 m · 304 triangles</p>
+<a href="img/refined_kit_05/details/radiator_wing_c.webp">Detail</a> <a href="img/refined_kit_05/scaled/radiator_wing_c.webp">Shared scale</a>
+<code>radiator_wing_c</code></div></article><article data-family="Extended solar panels" data-id="radiator_wing_d" data-search="swept solar panel radiator_wing_d extended solar panels">
+<a class="picture" href="img/refined_kit_05/details/radiator_wing_d.webp"><img loading="lazy" src="img/refined_kit_05/scaled/radiator_wing_d.webp" alt="Swept solar panel"></a>
+<div class="info"><small>Extended solar panels</small><h2>Swept solar panel</h2><p>3.1 × 1.7 × 0.4 m · 208 triangles</p>
+<a href="img/refined_kit_05/details/radiator_wing_d.webp">Detail</a> <a href="img/refined_kit_05/scaled/radiator_wing_d.webp">Shared scale</a>
+<code>radiator_wing_d</code></div></article><article data-family="Extended solar panels" data-id="radiator_wing_e" data-search="parallel solar array radiator_wing_e extended solar panels">
+<a class="picture" href="img/refined_kit_05/details/radiator_wing_e.webp"><img loading="lazy" src="img/refined_kit_05/scaled/radiator_wing_e.webp" alt="Parallel solar array"></a>
+<div class="info"><small>Extended solar panels</small><h2>Parallel solar array</h2><p>3.1 × 1.6 × 0.4 m · 184 triangles</p>
+<a href="img/refined_kit_05/details/radiator_wing_e.webp">Detail</a> <a href="img/refined_kit_05/scaled/radiator_wing_e.webp">Shared scale</a>
+<code>radiator_wing_e</code></div></article><article data-family="Power / service bays" data-id="service_drum_s2_2m" data-search="broad service drum / 2 m s2 service_drum_s2_2m power / service bays">
+<a class="picture" href="img/refined_kit_05/details/service_drum_s2_2m.webp"><img loading="lazy" src="img/refined_kit_05/scaled/service_drum_s2_2m.webp" alt="Broad service drum / 2 m S2"></a>
+<div class="info"><small>Power / service bays</small><h2>Broad service drum / 2 m S2</h2><p>4.3 × 2.0 × 2.5 m · 560 triangles</p>
+<a href="img/refined_kit_05/details/service_drum_s2_2m.webp">Detail</a> <a href="img/refined_kit_05/scaled/service_drum_s2_2m.webp">Shared scale</a>
+<code>service_drum_s2_2m</code></div></article><article data-family="Power / service bay" data-id="power_bay_a" data-search="cartridge bay power_bay_a power / service bay">
+<a class="picture" href="img/refined_kit_05/details/power_bay_a.webp"><img loading="lazy" src="img/refined_kit_05/scaled/power_bay_a.webp" alt="Cartridge bay"></a>
+<div class="info"><small>Power / service bay</small><h2>Cartridge bay</h2><p>2.3 × 2.0 × 2.3 m · 420 triangles</p>
+<a href="img/refined_kit_05/details/power_bay_a.webp">Detail</a> <a href="img/refined_kit_05/scaled/power_bay_a.webp">Shared scale</a>
+<code>power_bay_a</code></div></article><article data-family="Power / service bay" data-id="power_bay_b" data-search="battery drums power_bay_b power / service bay">
+<a class="picture" href="img/refined_kit_05/details/power_bay_b.webp"><img loading="lazy" src="img/refined_kit_05/scaled/power_bay_b.webp" alt="Battery drums"></a>
+<div class="info"><small>Power / service bay</small><h2>Battery drums</h2><p>1.9 × 2.0 × 1.8 m · 408 triangles</p>
+<a href="img/refined_kit_05/details/power_bay_b.webp">Detail</a> <a href="img/refined_kit_05/scaled/power_bay_b.webp">Shared scale</a>
+<code>power_bay_b</code></div></article><article data-family="Power / service bay" data-id="power_bay_c" data-search="shielded reactor power_bay_c power / service bay">
+<a class="picture" href="img/refined_kit_05/details/power_bay_c.webp"><img loading="lazy" src="img/refined_kit_05/scaled/power_bay_c.webp" alt="Shielded reactor"></a>
+<div class="info"><small>Power / service bay</small><h2>Shielded reactor</h2><p>2.0 × 2.0 × 2.0 m · 548 triangles</p>
+<a href="img/refined_kit_05/details/power_bay_c.webp">Detail</a> <a href="img/refined_kit_05/scaled/power_bay_c.webp">Shared scale</a>
+<code>power_bay_c</code></div></article><article data-family="Power / service bay" data-id="power_bay_d" data-search="open equipment rack power_bay_d power / service bay">
+<a class="picture" href="img/refined_kit_05/details/power_bay_d.webp"><img loading="lazy" src="img/refined_kit_05/scaled/power_bay_d.webp" alt="Open equipment rack"></a>
+<div class="info"><small>Power / service bay</small><h2>Open equipment rack</h2><p>1.8 × 2.0 × 1.8 m · 392 triangles</p>
+<a href="img/refined_kit_05/details/power_bay_d.webp">Detail</a> <a href="img/refined_kit_05/scaled/power_bay_d.webp">Shared scale</a>
+<code>power_bay_d</code></div></article><article data-family="Power / service bay" data-id="power_bay_e" data-search="solar auxiliary power_bay_e power / service bay">
+<a class="picture" href="img/refined_kit_05/details/power_bay_e.webp"><img loading="lazy" src="img/refined_kit_05/scaled/power_bay_e.webp" alt="Solar auxiliary"></a>
+<div class="info"><small>Power / service bay</small><h2>Solar auxiliary</h2><p>4.1 × 2.0 × 1.8 m · 456 triangles</p>
+<a href="img/refined_kit_05/details/power_bay_e.webp">Detail</a> <a href="img/refined_kit_05/scaled/power_bay_e.webp">Shared scale</a>
+<code>power_bay_e</code></div></article><article data-family="Docking collar" data-id="docking_collar_a" data-search="octagonal collar docking_collar_a docking collar">
+<a class="picture" href="img/refined_kit_05/details/docking_collar_a.webp"><img loading="lazy" src="img/refined_kit_05/scaled/docking_collar_a.webp" alt="Octagonal collar"></a>
+<div class="info"><small>Docking collar</small><h2>Octagonal collar</h2><p>1.8 × 1.0 × 1.8 m · 292 triangles</p>
+<a href="img/refined_kit_05/details/docking_collar_a.webp">Detail</a> <a href="img/refined_kit_05/scaled/docking_collar_a.webp">Shared scale</a>
+<code>docking_collar_a</code></div></article><article data-family="Docking collar" data-id="docking_collar_b" data-search="circular seal docking_collar_b docking collar">
+<a class="picture" href="img/refined_kit_05/details/docking_collar_b.webp"><img loading="lazy" src="img/refined_kit_05/scaled/docking_collar_b.webp" alt="Circular seal"></a>
+<div class="info"><small>Docking collar</small><h2>Circular seal</h2><p>1.6 × 1.0 × 1.6 m · 364 triangles</p>
+<a href="img/refined_kit_05/details/docking_collar_b.webp">Detail</a> <a href="img/refined_kit_05/scaled/docking_collar_b.webp">Shared scale</a>
+<code>docking_collar_b</code></div></article><article data-family="Docking collar" data-id="docking_collar_c" data-search="petal capture docking_collar_c docking collar">
+<a class="picture" href="img/refined_kit_05/details/docking_collar_c.webp"><img loading="lazy" src="img/refined_kit_05/scaled/docking_collar_c.webp" alt="Petal capture"></a>
+<div class="info"><small>Docking collar</small><h2>Petal capture</h2><p>2.0 × 1.0 × 2.0 m · 308 triangles</p>
+<a href="img/refined_kit_05/details/docking_collar_c.webp">Detail</a> <a href="img/refined_kit_05/scaled/docking_collar_c.webp">Shared scale</a>
+<code>docking_collar_c</code></div></article><article data-family="Docking collar" data-id="docking_collar_d" data-search="square vestibule docking_collar_d docking collar">
+<a class="picture" href="img/refined_kit_05/details/docking_collar_d.webp"><img loading="lazy" src="img/refined_kit_05/scaled/docking_collar_d.webp" alt="Square vestibule"></a>
+<div class="info"><small>Docking collar</small><h2>Square vestibule</h2><p>1.7 × 1.0 × 1.7 m · 308 triangles</p>
+<a href="img/refined_kit_05/details/docking_collar_d.webp">Detail</a> <a href="img/refined_kit_05/scaled/docking_collar_d.webp">Shared scale</a>
+<code>docking_collar_d</code></div></article><article data-family="Docking collar" data-id="docking_collar_e" data-search="long soft-dock docking_collar_e docking collar">
+<a class="picture" href="img/refined_kit_05/details/docking_collar_e.webp"><img loading="lazy" src="img/refined_kit_05/scaled/docking_collar_e.webp" alt="Long soft-dock"></a>
+<div class="info"><small>Docking collar</small><h2>Long soft-dock</h2><p>1.5 × 1.5 × 1.5 m · 536 triangles</p>
+<a href="img/refined_kit_05/details/docking_collar_e.webp">Detail</a> <a href="img/refined_kit_05/scaled/docking_collar_e.webp">Shared scale</a>
+<code>docking_collar_e</code></div></article><article data-family="Asteroid foot" data-id="landing_strut_a" data-search="angled foot landing_strut_a asteroid foot">
+<a class="picture" href="img/refined_kit_05/details/landing_strut_a.webp"><img loading="lazy" src="img/refined_kit_05/scaled/landing_strut_a.webp" alt="Angled foot"></a>
+<div class="info"><small>Asteroid foot</small><h2>Angled foot</h2><p>1.2 × 0.7 × 1.6 m · 88 triangles</p>
+<a href="img/refined_kit_05/details/landing_strut_a.webp">Detail</a> <a href="img/refined_kit_05/scaled/landing_strut_a.webp">Shared scale</a>
+<code>landing_strut_a</code></div></article><article data-family="Asteroid foot" data-id="landing_strut_b" data-search="bipod shoe landing_strut_b asteroid foot">
+<a class="picture" href="img/refined_kit_05/details/landing_strut_b.webp"><img loading="lazy" src="img/refined_kit_05/scaled/landing_strut_b.webp" alt="Bipod shoe"></a>
+<div class="info"><small>Asteroid foot</small><h2>Bipod shoe</h2><p>1.5 × 1.1 × 1.6 m · 136 triangles</p>
+<a href="img/refined_kit_05/details/landing_strut_b.webp">Detail</a> <a href="img/refined_kit_05/scaled/landing_strut_b.webp">Shared scale</a>
+<code>landing_strut_b</code></div></article><article data-family="Asteroid foot" data-id="landing_strut_c" data-search="telescopic spike landing_strut_c asteroid foot">
+<a class="picture" href="img/refined_kit_05/details/landing_strut_c.webp"><img loading="lazy" src="img/refined_kit_05/scaled/landing_strut_c.webp" alt="Telescopic spike"></a>
+<div class="info"><small>Asteroid foot</small><h2>Telescopic spike</h2><p>1.2 × 0.5 × 1.6 m · 136 triangles</p>
+<a href="img/refined_kit_05/details/landing_strut_c.webp">Detail</a> <a href="img/refined_kit_05/scaled/landing_strut_c.webp">Shared scale</a>
+<code>landing_strut_c</code></div></article><article data-family="Asteroid foot" data-id="landing_strut_d" data-search="tripod pad landing_strut_d asteroid foot">
+<a class="picture" href="img/refined_kit_05/details/landing_strut_d.webp"><img loading="lazy" src="img/refined_kit_05/scaled/landing_strut_d.webp" alt="Tripod pad"></a>
+<div class="info"><small>Asteroid foot</small><h2>Tripod pad</h2><p>1.6 × 1.1 × 1.6 m · 148 triangles</p>
+<a href="img/refined_kit_05/details/landing_strut_d.webp">Detail</a> <a href="img/refined_kit_05/scaled/landing_strut_d.webp">Shared scale</a>
+<code>landing_strut_d</code></div></article><article data-family="Asteroid foot" data-id="landing_strut_e" data-search="grapple foot landing_strut_e asteroid foot">
+<a class="picture" href="img/refined_kit_05/details/landing_strut_e.webp"><img loading="lazy" src="img/refined_kit_05/scaled/landing_strut_e.webp" alt="Grapple foot"></a>
+<div class="info"><small>Asteroid foot</small><h2>Grapple foot</h2><p>1.3 × 0.7 × 1.6 m · 160 triangles</p>
+<a href="img/refined_kit_05/details/landing_strut_e.webp">Detail</a> <a href="img/refined_kit_05/scaled/landing_strut_e.webp">Shared scale</a>
+<code>landing_strut_e</code></div></article><article data-family="Sensor mast" data-id="sensor_mast_a" data-search="optical mast sensor_mast_a sensor mast">
+<a class="picture" href="img/refined_kit_05/details/sensor_mast_a.webp"><img loading="lazy" src="img/refined_kit_05/scaled/sensor_mast_a.webp" alt="Optical mast"></a>
+<div class="info"><small>Sensor mast</small><h2>Optical mast</h2><p>0.6 × 0.4 × 1.2 m · 100 triangles</p>
+<a href="img/refined_kit_05/details/sensor_mast_a.webp">Detail</a> <a href="img/refined_kit_05/scaled/sensor_mast_a.webp">Shared scale</a>
+<code>sensor_mast_a</code></div></article><article data-family="Sensor mast" data-id="sensor_mast_b" data-search="faceted dish sensor_mast_b sensor mast">
+<a class="picture" href="img/refined_kit_05/details/sensor_mast_b.webp"><img loading="lazy" src="img/refined_kit_05/scaled/sensor_mast_b.webp" alt="Faceted dish"></a>
+<div class="info"><small>Sensor mast</small><h2>Faceted dish</h2><p>0.8 × 0.6 × 1.2 m · 176 triangles</p>
+<a href="img/refined_kit_05/details/sensor_mast_b.webp">Detail</a> <a href="img/refined_kit_05/scaled/sensor_mast_b.webp">Shared scale</a>
+<code>sensor_mast_b</code></div></article><article data-family="Sensor mast" data-id="sensor_mast_c" data-search="phased array sensor_mast_c sensor mast">
+<a class="picture" href="img/refined_kit_05/details/sensor_mast_c.webp"><img loading="lazy" src="img/refined_kit_05/scaled/sensor_mast_c.webp" alt="Phased array"></a>
+<div class="info"><small>Sensor mast</small><h2>Phased array</h2><p>0.8 × 0.4 × 1.1 m · 232 triangles</p>
+<a href="img/refined_kit_05/details/sensor_mast_c.webp">Detail</a> <a href="img/refined_kit_05/scaled/sensor_mast_c.webp">Shared scale</a>
+<code>sensor_mast_c</code></div></article><article data-family="Sensor mast" data-id="sensor_mast_d" data-search="twin optics sensor_mast_d sensor mast">
+<a class="picture" href="img/refined_kit_05/details/sensor_mast_d.webp"><img loading="lazy" src="img/refined_kit_05/scaled/sensor_mast_d.webp" alt="Twin optics"></a>
+<div class="info"><small>Sensor mast</small><h2>Twin optics</h2><p>0.8 × 0.4 × 1.1 m · 240 triangles</p>
+<a href="img/refined_kit_05/details/sensor_mast_d.webp">Detail</a> <a href="img/refined_kit_05/scaled/sensor_mast_d.webp">Shared scale</a>
+<code>sensor_mast_d</code></div></article><article data-family="Sensor mast" data-id="sensor_mast_e" data-search="swept antenna sensor_mast_e sensor mast">
+<a class="picture" href="img/refined_kit_05/details/sensor_mast_e.webp"><img loading="lazy" src="img/refined_kit_05/scaled/sensor_mast_e.webp" alt="Swept antenna"></a>
+<div class="info"><small>Sensor mast</small><h2>Swept antenna</h2><p>0.8 × 0.5 × 1.2 m · 124 triangles</p>
+<a href="img/refined_kit_05/details/sensor_mast_e.webp">Detail</a> <a href="img/refined_kit_05/scaled/sensor_mast_e.webp">Shared scale</a>
+<code>sensor_mast_e</code></div></article><article data-family="Surface mounts" data-id="surface_plate_long" data-search="flat surface plate / long surface_plate_long surface mounts">
+<a class="picture" href="img/refined_kit_05/details/surface_plate_long.webp"><img loading="lazy" src="img/refined_kit_05/scaled/surface_plate_long.webp" alt="Flat surface plate / long"></a>
+<div class="info"><small>Surface mounts</small><h2>Flat surface plate / long</h2><p>0.8 × 1.8 × 0.1 m · 124 triangles</p>
+<a href="img/refined_kit_05/details/surface_plate_long.webp">Detail</a> <a href="img/refined_kit_05/scaled/surface_plate_long.webp">Shared scale</a>
+<code>surface_plate_long</code></div></article><article data-family="Surface mounts" data-id="surface_plate_short" data-search="flat surface plate / short surface_plate_short surface mounts">
+<a class="picture" href="img/refined_kit_05/details/surface_plate_short.webp"><img loading="lazy" src="img/refined_kit_05/scaled/surface_plate_short.webp" alt="Flat surface plate / short"></a>
+<div class="info"><small>Surface mounts</small><h2>Flat surface plate / short</h2><p>0.5 × 0.9 × 0.1 m · 124 triangles</p>
+<a href="img/refined_kit_05/details/surface_plate_short.webp">Detail</a> <a href="img/refined_kit_05/scaled/surface_plate_short.webp">Shared scale</a>
+<code>surface_plate_short</code></div></article><article data-family="Surface mounts" data-id="surface_socket_s1" data-search="surface socket / s1 surface_socket_s1 surface mounts">
+<a class="picture" href="img/refined_kit_05/details/surface_socket_s1.webp"><img loading="lazy" src="img/refined_kit_05/scaled/surface_socket_s1.webp" alt="Surface socket / S1"></a>
+<div class="info"><small>Surface mounts</small><h2>Surface socket / S1</h2><p>1.2 × 1.2 × 0.3 m · 156 triangles</p>
+<a href="img/refined_kit_05/details/surface_socket_s1.webp">Detail</a> <a href="img/refined_kit_05/scaled/surface_socket_s1.webp">Shared scale</a>
+<code>surface_socket_s1</code></div></article><article data-family="Surface mounts" data-id="surface_socket_s2" data-search="surface socket / s2 surface_socket_s2 surface mounts">
+<a class="picture" href="img/refined_kit_05/details/surface_socket_s2.webp"><img loading="lazy" src="img/refined_kit_05/scaled/surface_socket_s2.webp" alt="Surface socket / S2"></a>
+<div class="info"><small>Surface mounts</small><h2>Surface socket / S2</h2><p>1.8 × 1.8 × 0.4 m · 156 triangles</p>
+<a href="img/refined_kit_05/details/surface_socket_s2.webp">Detail</a> <a href="img/refined_kit_05/scaled/surface_socket_s2.webp">Shared scale</a>
+<code>surface_socket_s2</code></div></article><article data-family="Strapped tank" data-id="kit1_tank_faceted_a_bare" data-search="single capsule kit1_tank_faceted_a_bare strapped tank">
+<a class="picture" href="img/refined_kit_05/details/kit1_tank_faceted_a_bare.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit1_tank_faceted_a_bare.webp" alt="Single capsule"></a>
+<div class="info"><small>Strapped tank</small><h2>Single capsule</h2><p>1.8 × 3.8 × 1.8 m · 1,996 triangles</p>
+<a href="img/refined_kit_05/details/kit1_tank_faceted_a_bare.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit1_tank_faceted_a_bare.webp">Shared scale</a>
+<code>kit1_tank_faceted_a_bare</code></div></article><article data-family="Strapped tank" data-id="kit1_tank_faceted_b_bare" data-search="twin cylinders / with fitting kit1_tank_faceted_b_bare strapped tank">
+<a class="picture" href="img/refined_kit_05/details/kit1_tank_faceted_b_bare.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit1_tank_faceted_b_bare.webp" alt="Twin cylinders / With fitting"></a>
+<div class="info"><small>Strapped tank</small><h2>Twin cylinders / With fitting</h2><p>2.1 × 3.9 × 1.4 m · 2,504 triangles</p>
+<a href="img/refined_kit_05/details/kit1_tank_faceted_b_bare.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit1_tank_faceted_b_bare.webp">Shared scale</a>
+<code>kit1_tank_faceted_b_bare</code></div></article><article data-family="Strapped tank" data-id="kit1_tank_faceted_b_plain" data-search="twin cylinders / no fitting kit1_tank_faceted_b_plain strapped tank">
+<a class="picture" href="img/refined_kit_05/details/kit1_tank_faceted_b_plain.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit1_tank_faceted_b_plain.webp" alt="Twin cylinders / No fitting"></a>
+<div class="info"><small>Strapped tank</small><h2>Twin cylinders / No fitting</h2><p>2.1 × 3.6 × 1.4 m · 2,468 triangles</p>
+<a href="img/refined_kit_05/details/kit1_tank_faceted_b_plain.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit1_tank_faceted_b_plain.webp">Shared scale</a>
+<code>kit1_tank_faceted_b_plain</code></div></article><article data-family="Strapped tank" data-id="kit1_tank_faceted_c_bare" data-search="sphere train / with fitting kit1_tank_faceted_c_bare strapped tank">
+<a class="picture" href="img/refined_kit_05/details/kit1_tank_faceted_c_bare.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit1_tank_faceted_c_bare.webp" alt="Sphere train / With fitting"></a>
+<div class="info"><small>Strapped tank</small><h2>Sphere train / With fitting</h2><p>1.8 × 3.9 × 1.8 m · 2,196 triangles</p>
+<a href="img/refined_kit_05/details/kit1_tank_faceted_c_bare.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit1_tank_faceted_c_bare.webp">Shared scale</a>
+<code>kit1_tank_faceted_c_bare</code></div></article><article data-family="Strapped tank" data-id="kit1_tank_faceted_c_plain" data-search="sphere train / no fitting kit1_tank_faceted_c_plain strapped tank">
+<a class="picture" href="img/refined_kit_05/details/kit1_tank_faceted_c_plain.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit1_tank_faceted_c_plain.webp" alt="Sphere train / No fitting"></a>
+<div class="info"><small>Strapped tank</small><h2>Sphere train / No fitting</h2><p>1.8 × 3.6 × 1.8 m · 2,160 triangles</p>
+<a href="img/refined_kit_05/details/kit1_tank_faceted_c_plain.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit1_tank_faceted_c_plain.webp">Shared scale</a>
+<code>kit1_tank_faceted_c_plain</code></div></article><article data-family="Strapped tank" data-id="kit1_tank_faceted_d_bare" data-search="saddle tanks / with fitting kit1_tank_faceted_d_bare strapped tank">
+<a class="picture" href="img/refined_kit_05/details/kit1_tank_faceted_d_bare.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit1_tank_faceted_d_bare.webp" alt="Saddle tanks / With fitting"></a>
+<div class="info"><small>Strapped tank</small><h2>Saddle tanks / With fitting</h2><p>2.3 × 3.9 × 1.4 m · 3,188 triangles</p>
+<a href="img/refined_kit_05/details/kit1_tank_faceted_d_bare.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit1_tank_faceted_d_bare.webp">Shared scale</a>
+<code>kit1_tank_faceted_d_bare</code></div></article><article data-family="Strapped tank" data-id="kit1_tank_faceted_d_plain" data-search="saddle tanks / no fitting kit1_tank_faceted_d_plain strapped tank">
+<a class="picture" href="img/refined_kit_05/details/kit1_tank_faceted_d_plain.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit1_tank_faceted_d_plain.webp" alt="Saddle tanks / No fitting"></a>
+<div class="info"><small>Strapped tank</small><h2>Saddle tanks / No fitting</h2><p>2.3 × 3.6 × 1.4 m · 3,152 triangles</p>
+<a href="img/refined_kit_05/details/kit1_tank_faceted_d_plain.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit1_tank_faceted_d_plain.webp">Shared scale</a>
+<code>kit1_tank_faceted_d_plain</code></div></article><article data-family="Strapped tank" data-id="kit1_tank_faceted_e_plain" data-search="armored reservoir / no fitting kit1_tank_faceted_e_plain strapped tank">
+<a class="picture" href="img/refined_kit_05/details/kit1_tank_faceted_e_plain.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit1_tank_faceted_e_plain.webp" alt="Armored reservoir / No fitting"></a>
+<div class="info"><small>Strapped tank</small><h2>Armored reservoir / No fitting</h2><p>1.9 × 3.6 × 1.6 m · 1,548 triangles</p>
+<a href="img/refined_kit_05/details/kit1_tank_faceted_e_plain.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit1_tank_faceted_e_plain.webp">Shared scale</a>
+<code>kit1_tank_faceted_e_plain</code></div></article><article data-family="Cargo cassette" data-id="kit1_cargo_pod_a_bare" data-search="standard pod kit1_cargo_pod_a_bare cargo cassette">
+<a class="picture" href="img/refined_kit_05/details/kit1_cargo_pod_a_bare.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit1_cargo_pod_a_bare.webp" alt="Standard pod"></a>
+<div class="info"><small>Cargo cassette</small><h2>Standard pod</h2><p>2.6 × 3.8 × 2.6 m · 704 triangles</p>
+<a href="img/refined_kit_05/details/kit1_cargo_pod_a_bare.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit1_cargo_pod_a_bare.webp">Shared scale</a>
+<code>kit1_cargo_pod_a_bare</code></div></article><article data-family="Cargo cassette" data-id="kit1_cargo_pod_b_plain" data-search="round canister / no fitting kit1_cargo_pod_b_plain cargo cassette">
+<a class="picture" href="img/refined_kit_05/details/kit1_cargo_pod_b_plain.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit1_cargo_pod_b_plain.webp" alt="Round canister / No fitting"></a>
+<div class="info"><small>Cargo cassette</small><h2>Round canister / No fitting</h2><p>2.0 × 3.8 × 2.0 m · 608 triangles</p>
+<a href="img/refined_kit_05/details/kit1_cargo_pod_b_plain.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit1_cargo_pod_b_plain.webp">Shared scale</a>
+<code>kit1_cargo_pod_b_plain</code></div></article><article data-family="Cargo cassette" data-id="kit1_cargo_pod_c_bare" data-search="twin containers / with fitting kit1_cargo_pod_c_bare cargo cassette">
+<a class="picture" href="img/refined_kit_05/details/kit1_cargo_pod_c_bare.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit1_cargo_pod_c_bare.webp" alt="Twin containers / With fitting"></a>
+<div class="info"><small>Cargo cassette</small><h2>Twin containers / With fitting</h2><p>2.0 × 3.8 × 1.3 m · 1,032 triangles</p>
+<a href="img/refined_kit_05/details/kit1_cargo_pod_c_bare.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit1_cargo_pod_c_bare.webp">Shared scale</a>
+<code>kit1_cargo_pod_c_bare</code></div></article><article data-family="Cargo cassette" data-id="kit1_cargo_pod_d_plain" data-search="exposed pallet / no fitting kit1_cargo_pod_d_plain cargo cassette">
+<a class="picture" href="img/refined_kit_05/details/kit1_cargo_pod_d_plain.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit1_cargo_pod_d_plain.webp" alt="Exposed pallet / No fitting"></a>
+<div class="info"><small>Cargo cassette</small><h2>Exposed pallet / No fitting</h2><p>2.0 × 3.8 × 1.2 m · 2,616 triangles</p>
+<a href="img/refined_kit_05/details/kit1_cargo_pod_d_plain.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit1_cargo_pod_d_plain.webp">Shared scale</a>
+<code>kit1_cargo_pod_d_plain</code></div></article><article data-family="Cargo cassette" data-id="kit1_cargo_pod_e_plain" data-search="armored vault / no fitting kit1_cargo_pod_e_plain cargo cassette">
+<a class="picture" href="img/refined_kit_05/details/kit1_cargo_pod_e_plain.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit1_cargo_pod_e_plain.webp" alt="Armored vault / No fitting"></a>
+<div class="info"><small>Cargo cassette</small><h2>Armored vault / No fitting</h2><p>2.4 × 3.8 × 1.9 m · 1,032 triangles</p>
+<a href="img/refined_kit_05/details/kit1_cargo_pod_e_plain.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit1_cargo_pod_e_plain.webp">Shared scale</a>
+<code>kit1_cargo_pod_e_plain</code></div></article><article data-family="Strapped cargo boxes" data-id="kit1_cargo_box_a_bare" data-search="strapped container kit1_cargo_box_a_bare strapped cargo boxes">
+<a class="picture" href="img/refined_kit_05/details/kit1_cargo_box_a_bare.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit1_cargo_box_a_bare.webp" alt="Strapped container"></a>
+<div class="info"><small>Strapped cargo boxes</small><h2>Strapped container</h2><p>3.0 × 6.0 × 2.8 m · 1,136 triangles</p>
+<a href="img/refined_kit_05/details/kit1_cargo_box_a_bare.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit1_cargo_box_a_bare.webp">Shared scale</a>
+<code>kit1_cargo_box_a_bare</code></div></article><article data-family="Strapped cargo boxes" data-id="kit1_cargo_box_b_bare" data-search="short container kit1_cargo_box_b_bare strapped cargo boxes">
+<a class="picture" href="img/refined_kit_05/details/kit1_cargo_box_b_bare.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit1_cargo_box_b_bare.webp" alt="Short container"></a>
+<div class="info"><small>Strapped cargo boxes</small><h2>Short container</h2><p>3.0 × 3.0 × 2.8 m · 1,064 triangles</p>
+<a href="img/refined_kit_05/details/kit1_cargo_box_b_bare.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit1_cargo_box_b_bare.webp">Shared scale</a>
+<code>kit1_cargo_box_b_bare</code></div></article><article data-family="Strapped cargo boxes" data-id="kit1_cargo_box_c_bare" data-search="reinforced container kit1_cargo_box_c_bare strapped cargo boxes">
+<a class="picture" href="img/refined_kit_05/details/kit1_cargo_box_c_bare.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit1_cargo_box_c_bare.webp" alt="Reinforced container"></a>
+<div class="info"><small>Strapped cargo boxes</small><h2>Reinforced container</h2><p>3.0 × 6.0 × 2.8 m · 1,404 triangles</p>
+<a href="img/refined_kit_05/details/kit1_cargo_box_c_bare.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit1_cargo_box_c_bare.webp">Shared scale</a>
+<code>kit1_cargo_box_c_bare</code></div></article><article data-family="Octagonal hull adapters" data-id="kit1_octagonal_adapter_short" data-search="short octagonal adapter / slender to compact &amp; shielded kit1_octagonal_adapter_short octagonal hull adapters">
+<a class="picture" href="img/refined_kit_05/details/kit1_octagonal_adapter_short.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit1_octagonal_adapter_short.webp" alt="Short octagonal adapter / Slender to compact &amp; shielded"></a>
+<div class="info"><small>Octagonal hull adapters</small><h2>Short octagonal adapter / Slender to compact &amp; shielded</h2><p>2.8 × 0.2 × 2.8 m · 60 triangles</p>
+<a href="img/refined_kit_05/details/kit1_octagonal_adapter_short.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit1_octagonal_adapter_short.webp">Shared scale</a>
+<code>kit1_octagonal_adapter_short</code></div></article><article data-family="Octagonal hull adapters" data-id="kit1_octagonal_adapter_wide_short" data-search="short octagonal adapter / slender to drum &amp; laboratory kit1_octagonal_adapter_wide_short octagonal hull adapters">
+<a class="picture" href="img/refined_kit_05/details/kit1_octagonal_adapter_wide_short.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit1_octagonal_adapter_wide_short.webp" alt="Short octagonal adapter / Slender to drum &amp; laboratory"></a>
+<div class="info"><small>Octagonal hull adapters</small><h2>Short octagonal adapter / Slender to drum &amp; laboratory</h2><p>2.9 × 0.2 × 2.8 m · 60 triangles</p>
+<a href="img/refined_kit_05/details/kit1_octagonal_adapter_wide_short.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit1_octagonal_adapter_wide_short.webp">Shared scale</a>
+<code>kit1_octagonal_adapter_wide_short</code></div></article><article data-family="Extended solar panels" data-id="solar_panel_a_2x" data-search="tapered solar panel / 2x length solar_panel_a_2x extended solar panels">
+<a class="picture" href="img/refined_kit_05/details/solar_panel_a_2x.webp"><img loading="lazy" src="img/refined_kit_05/scaled/solar_panel_a_2x.webp" alt="Tapered solar panel / 2x length"></a>
+<div class="info"><small>Extended solar panels</small><h2>Tapered solar panel / 2x length</h2><p>6.1 × 1.9 × 0.4 m · 220 triangles</p>
+<a href="img/refined_kit_05/details/solar_panel_a_2x.webp">Detail</a> <a href="img/refined_kit_05/scaled/solar_panel_a_2x.webp">Shared scale</a>
+<code>solar_panel_a_2x</code></div></article><article data-family="Extended solar panels" data-id="solar_panel_a_3x" data-search="tapered solar panel / 3x length solar_panel_a_3x extended solar panels">
+<a class="picture" href="img/refined_kit_05/details/solar_panel_a_3x.webp"><img loading="lazy" src="img/refined_kit_05/scaled/solar_panel_a_3x.webp" alt="Tapered solar panel / 3x length"></a>
+<div class="info"><small>Extended solar panels</small><h2>Tapered solar panel / 3x length</h2><p>9.1 × 1.9 × 0.4 m · 220 triangles</p>
+<a href="img/refined_kit_05/details/solar_panel_a_3x.webp">Detail</a> <a href="img/refined_kit_05/scaled/solar_panel_a_3x.webp">Shared scale</a>
+<code>solar_panel_a_3x</code></div></article><article data-family="Extended solar panels" data-id="solar_panel_b_2x" data-search="split solar array / 2x length solar_panel_b_2x extended solar panels">
+<a class="picture" href="img/refined_kit_05/details/solar_panel_b_2x.webp"><img loading="lazy" src="img/refined_kit_05/scaled/solar_panel_b_2x.webp" alt="Split solar array / 2x length"></a>
+<div class="info"><small>Extended solar panels</small><h2>Split solar array / 2x length</h2><p>6.2 × 2.0 × 0.4 m · 424 triangles</p>
+<a href="img/refined_kit_05/details/solar_panel_b_2x.webp">Detail</a> <a href="img/refined_kit_05/scaled/solar_panel_b_2x.webp">Shared scale</a>
+<code>solar_panel_b_2x</code></div></article><article data-family="Extended solar panels" data-id="solar_panel_b_3x" data-search="split solar array / 3x length solar_panel_b_3x extended solar panels">
+<a class="picture" href="img/refined_kit_05/details/solar_panel_b_3x.webp"><img loading="lazy" src="img/refined_kit_05/scaled/solar_panel_b_3x.webp" alt="Split solar array / 3x length"></a>
+<div class="info"><small>Extended solar panels</small><h2>Split solar array / 3x length</h2><p>9.3 × 2.0 × 0.4 m · 424 triangles</p>
+<a href="img/refined_kit_05/details/solar_panel_b_3x.webp">Detail</a> <a href="img/refined_kit_05/scaled/solar_panel_b_3x.webp">Shared scale</a>
+<code>solar_panel_b_3x</code></div></article><article data-family="Extended solar panels" data-id="solar_panel_c_2x" data-search="ladder solar array / 2x length solar_panel_c_2x extended solar panels">
+<a class="picture" href="img/refined_kit_05/details/solar_panel_c_2x.webp"><img loading="lazy" src="img/refined_kit_05/scaled/solar_panel_c_2x.webp" alt="Ladder solar array / 2x length"></a>
+<div class="info"><small>Extended solar panels</small><h2>Ladder solar array / 2x length</h2><p>6.2 × 1.7 × 0.4 m · 304 triangles</p>
+<a href="img/refined_kit_05/details/solar_panel_c_2x.webp">Detail</a> <a href="img/refined_kit_05/scaled/solar_panel_c_2x.webp">Shared scale</a>
+<code>solar_panel_c_2x</code></div></article><article data-family="Extended solar panels" data-id="solar_panel_c_3x" data-search="ladder solar array / 3x length solar_panel_c_3x extended solar panels">
+<a class="picture" href="img/refined_kit_05/details/solar_panel_c_3x.webp"><img loading="lazy" src="img/refined_kit_05/scaled/solar_panel_c_3x.webp" alt="Ladder solar array / 3x length"></a>
+<div class="info"><small>Extended solar panels</small><h2>Ladder solar array / 3x length</h2><p>9.3 × 1.7 × 0.4 m · 304 triangles</p>
+<a href="img/refined_kit_05/details/solar_panel_c_3x.webp">Detail</a> <a href="img/refined_kit_05/scaled/solar_panel_c_3x.webp">Shared scale</a>
+<code>solar_panel_c_3x</code></div></article><article data-family="Extended solar panels" data-id="solar_panel_d_2x" data-search="swept solar panel / 2x length solar_panel_d_2x extended solar panels">
+<a class="picture" href="img/refined_kit_05/details/solar_panel_d_2x.webp"><img loading="lazy" src="img/refined_kit_05/scaled/solar_panel_d_2x.webp" alt="Swept solar panel / 2x length"></a>
+<div class="info"><small>Extended solar panels</small><h2>Swept solar panel / 2x length</h2><p>6.2 × 1.7 × 0.4 m · 208 triangles</p>
+<a href="img/refined_kit_05/details/solar_panel_d_2x.webp">Detail</a> <a href="img/refined_kit_05/scaled/solar_panel_d_2x.webp">Shared scale</a>
+<code>solar_panel_d_2x</code></div></article><article data-family="Extended solar panels" data-id="solar_panel_d_3x" data-search="swept solar panel / 3x length solar_panel_d_3x extended solar panels">
+<a class="picture" href="img/refined_kit_05/details/solar_panel_d_3x.webp"><img loading="lazy" src="img/refined_kit_05/scaled/solar_panel_d_3x.webp" alt="Swept solar panel / 3x length"></a>
+<div class="info"><small>Extended solar panels</small><h2>Swept solar panel / 3x length</h2><p>9.3 × 1.7 × 0.4 m · 208 triangles</p>
+<a href="img/refined_kit_05/details/solar_panel_d_3x.webp">Detail</a> <a href="img/refined_kit_05/scaled/solar_panel_d_3x.webp">Shared scale</a>
+<code>solar_panel_d_3x</code></div></article><article data-family="Extended solar panels" data-id="solar_panel_e_2x" data-search="parallel solar array / 2x length solar_panel_e_2x extended solar panels">
+<a class="picture" href="img/refined_kit_05/details/solar_panel_e_2x.webp"><img loading="lazy" src="img/refined_kit_05/scaled/solar_panel_e_2x.webp" alt="Parallel solar array / 2x length"></a>
+<div class="info"><small>Extended solar panels</small><h2>Parallel solar array / 2x length</h2><p>6.2 × 1.6 × 0.4 m · 184 triangles</p>
+<a href="img/refined_kit_05/details/solar_panel_e_2x.webp">Detail</a> <a href="img/refined_kit_05/scaled/solar_panel_e_2x.webp">Shared scale</a>
+<code>solar_panel_e_2x</code></div></article><article data-family="Extended solar panels" data-id="solar_panel_e_3x" data-search="parallel solar array / 3x length solar_panel_e_3x extended solar panels">
+<a class="picture" href="img/refined_kit_05/details/solar_panel_e_3x.webp"><img loading="lazy" src="img/refined_kit_05/scaled/solar_panel_e_3x.webp" alt="Parallel solar array / 3x length"></a>
+<div class="info"><small>Extended solar panels</small><h2>Parallel solar array / 3x length</h2><p>9.3 × 1.6 × 0.4 m · 184 triangles</p>
+<a href="img/refined_kit_05/details/solar_panel_e_3x.webp">Detail</a> <a href="img/refined_kit_05/scaled/solar_panel_e_3x.webp">Shared scale</a>
+<code>solar_panel_e_3x</code></div></article><article data-family="Operations capsules" data-id="kit2_capsule_a" data-search="a / faceted bell kit2_capsule_a operations capsules">
+<a class="picture" href="img/refined_kit_05/details/kit2_capsule_a.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit2_capsule_a.webp" alt="A / Faceted Bell"></a>
+<div class="info"><small>Operations capsules</small><h2>A / Faceted Bell</h2><p>3.8 × 5.8 × 4.5 m · 24,272 triangles</p>
+<a href="img/refined_kit_05/details/kit2_capsule_a.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit2_capsule_a.webp">Shared scale</a>
+<code>kit2_capsule_a</code></div></article><article data-family="Operations capsules" data-id="kit2_capsule_b" data-search="b / round capsule kit2_capsule_b operations capsules">
+<a class="picture" href="img/refined_kit_05/details/kit2_capsule_b.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit2_capsule_b.webp" alt="B / Round Capsule"></a>
+<div class="info"><small>Operations capsules</small><h2>B / Round Capsule</h2><p>4.0 × 5.2 × 4.6 m · 27,872 triangles</p>
+<a href="img/refined_kit_05/details/kit2_capsule_b.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit2_capsule_b.webp">Shared scale</a>
+<code>kit2_capsule_b</code></div></article><article data-family="Operations capsules" data-id="kit2_capsule_c" data-search="c / axial barrel kit2_capsule_c operations capsules">
+<a class="picture" href="img/refined_kit_05/details/kit2_capsule_c.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit2_capsule_c.webp" alt="C / Axial Barrel"></a>
+<div class="info"><small>Operations capsules</small><h2>C / Axial Barrel</h2><p>3.8 × 7.6 × 4.5 m · 28,528 triangles</p>
+<a href="img/refined_kit_05/details/kit2_capsule_c.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit2_capsule_c.webp">Shared scale</a>
+<code>kit2_capsule_c</code></div></article><article data-family="Operations capsules" data-id="kit2_capsule_d" data-search="d / flat-face pod kit2_capsule_d operations capsules">
+<a class="picture" href="img/refined_kit_05/details/kit2_capsule_d.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit2_capsule_d.webp" alt="D / Flat-Face Pod"></a>
+<div class="info"><small>Operations capsules</small><h2>D / Flat-Face Pod</h2><p>3.8 × 3.2 × 4.5 m · 23,024 triangles</p>
+<a href="img/refined_kit_05/details/kit2_capsule_d.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit2_capsule_d.webp">Shared scale</a>
+<code>kit2_capsule_d</code></div></article><article data-family="Habitats" data-id="kit2_hab_01" data-search="compact habitat kit2_hab_01 habitats">
+<a class="picture" href="img/refined_kit_05/details/kit2_hab_01.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit2_hab_01.webp" alt="Compact habitat"></a>
+<div class="info"><small>Habitats</small><h2>Compact habitat</h2><p>3.7 × 4.5 × 4.5 m · 20,240 triangles</p>
+<a href="img/refined_kit_05/details/kit2_hab_01.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit2_hab_01.webp">Shared scale</a>
+<code>kit2_hab_01</code></div></article><article data-family="Habitats" data-id="kit2_hab_02" data-search="long habitat kit2_hab_02 habitats">
+<a class="picture" href="img/refined_kit_05/details/kit2_hab_02.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit2_hab_02.webp" alt="Long habitat"></a>
+<div class="info"><small>Habitats</small><h2>Long habitat</h2><p>3.7 × 7.5 × 4.5 m · 23,120 triangles</p>
+<a href="img/refined_kit_05/details/kit2_hab_02.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit2_hab_02.webp">Shared scale</a>
+<code>kit2_hab_02</code></div></article><article data-family="Habitats" data-id="kit2_hab_03" data-search="workshop habitat kit2_hab_03 habitats">
+<a class="picture" href="img/refined_kit_05/details/kit2_hab_03.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit2_hab_03.webp" alt="Workshop habitat"></a>
+<div class="info"><small>Habitats</small><h2>Workshop habitat</h2><p>3.8 × 6.0 × 4.5 m · 23,168 triangles</p>
+<a href="img/refined_kit_05/details/kit2_hab_03.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit2_hab_03.webp">Shared scale</a>
+<code>kit2_hab_03</code></div></article><article data-family="Service collars" data-id="kit2_utility_01" data-search="short service collar kit2_utility_01 service collars">
+<a class="picture" href="img/refined_kit_05/details/kit2_utility_01.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit2_utility_01.webp" alt="Short service collar"></a>
+<div class="info"><small>Service collars</small><h2>Short service collar</h2><p>3.5 × 2.2 × 4.3 m · 13,552 triangles</p>
+<a href="img/refined_kit_05/details/kit2_utility_01.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit2_utility_01.webp">Shared scale</a>
+<code>kit2_utility_01</code></div></article><article data-family="Service collars" data-id="kit2_utility_02" data-search="thermal manifold collar kit2_utility_02 service collars">
+<a class="picture" href="img/refined_kit_05/details/kit2_utility_02.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit2_utility_02.webp" alt="Thermal manifold collar"></a>
+<div class="info"><small>Service collars</small><h2>Thermal manifold collar</h2><p>3.5 × 2.8 × 4.3 m · 16,864 triangles</p>
+<a href="img/refined_kit_05/details/kit2_utility_02.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit2_utility_02.webp">Shared scale</a>
+<code>kit2_utility_02</code></div></article><article data-family="Service collars" data-id="kit2_utility_03" data-search="machinery collar kit2_utility_03 service collars">
+<a class="picture" href="img/refined_kit_05/details/kit2_utility_03.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit2_utility_03.webp" alt="Machinery collar"></a>
+<div class="info"><small>Service collars</small><h2>Machinery collar</h2><p>3.5 × 3.7 × 4.3 m · 16,336 triangles</p>
+<a href="img/refined_kit_05/details/kit2_utility_03.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit2_utility_03.webp">Shared scale</a>
+<code>kit2_utility_03</code></div></article><article data-family="Main drives" data-id="kit2_drive_01" data-search="axial single drive kit2_drive_01 main drives">
+<a class="picture" href="img/refined_kit_05/details/kit2_drive_01.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit2_drive_01.webp" alt="Axial single drive"></a>
+<div class="info"><small>Main drives</small><h2>Axial single drive</h2><p>3.6 × 3.0 × 4.4 m · 14,270 triangles</p>
+<a href="img/refined_kit_05/details/kit2_drive_01.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit2_drive_01.webp">Shared scale</a>
+<code>kit2_drive_01</code></div></article><article data-family="Main drives" data-id="kit2_drive_03" data-search="radial triple drive kit2_drive_03 main drives">
+<a class="picture" href="img/refined_kit_05/details/kit2_drive_03.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit2_drive_03.webp" alt="Radial triple drive"></a>
+<div class="info"><small>Main drives</small><h2>Radial triple drive</h2><p>3.6 × 2.6 × 4.4 m · 20,998 triangles</p>
+<a href="img/refined_kit_05/details/kit2_drive_03.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit2_drive_03.webp">Shared scale</a>
+<code>kit2_drive_03</code></div></article><article data-family="Equipment bays" data-id="kit2_equipment_01" data-search="ring-braced open bay kit2_equipment_01 equipment bays">
+<a class="picture" href="img/refined_kit_05/details/kit2_equipment_01.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit2_equipment_01.webp" alt="Ring-braced open bay"></a>
+<div class="info"><small>Equipment bays</small><h2>Ring-braced open bay</h2><p>3.8 × 6.0 × 4.5 m · 22,000 triangles</p>
+<a href="img/refined_kit_05/details/kit2_equipment_01.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit2_equipment_01.webp">Shared scale</a>
+<code>kit2_equipment_01</code></div></article><article data-family="Equipment bays" data-id="kit2_equipment_02" data-search="four-strake bay kit2_equipment_02 equipment bays">
+<a class="picture" href="img/refined_kit_05/details/kit2_equipment_02.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit2_equipment_02.webp" alt="Four-strake bay"></a>
+<div class="info"><small>Equipment bays</small><h2>Four-strake bay</h2><p>3.8 × 6.0 × 4.5 m · 23,008 triangles</p>
+<a href="img/refined_kit_05/details/kit2_equipment_02.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit2_equipment_02.webp">Shared scale</a>
+<code>kit2_equipment_02</code></div></article><article data-family="Equipment bays" data-id="kit2_equipment_03" data-search="segmented service bay kit2_equipment_03 equipment bays">
+<a class="picture" href="img/refined_kit_05/details/kit2_equipment_03.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit2_equipment_03.webp" alt="Segmented service bay"></a>
+<div class="info"><small>Equipment bays</small><h2>Segmented service bay</h2><p>3.8 × 6.0 × 4.5 m · 23,072 triangles</p>
+<a href="img/refined_kit_05/details/kit2_equipment_03.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit2_equipment_03.webp">Shared scale</a>
+<code>kit2_equipment_03</code></div></article><article data-family="Module back plates" data-id="kit3_backplate_fore" data-search="module back plate / fore kit3_backplate_fore module back plates">
+<a class="picture" href="img/refined_kit_05/details/kit3_backplate_fore.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit3_backplate_fore.webp" alt="Module back plate / fore"></a>
+<div class="info"><small>Module back plates</small><h2>Module back plate / fore</h2><p>3.3 × 0.4 × 4.1 m · 2,260 triangles</p>
+<a href="img/refined_kit_05/details/kit3_backplate_fore.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit3_backplate_fore.webp">Shared scale</a>
+<code>kit3_backplate_fore</code></div></article><article data-family="Module back plates" data-id="kit3_backplate_aft" data-search="module back plate / aft kit3_backplate_aft module back plates">
+<a class="picture" href="img/refined_kit_05/details/kit3_backplate_aft.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit3_backplate_aft.webp" alt="Module back plate / aft"></a>
+<div class="info"><small>Module back plates</small><h2>Module back plate / aft</h2><p>3.3 × 0.3 × 4.1 m · 2,292 triangles</p>
+<a href="img/refined_kit_05/details/kit3_backplate_aft.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit3_backplate_aft.webp">Shared scale</a>
+<code>kit3_backplate_aft</code></div></article><article data-family="Module back plates" data-id="kit3_backplate_small_slender_fore" data-search="small back plate / slender / fore kit3_backplate_small_slender_fore module back plates">
+<a class="picture" href="img/refined_kit_05/details/kit3_backplate_small_slender_fore.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit3_backplate_small_slender_fore.webp" alt="Small back plate / Slender / fore"></a>
+<div class="info"><small>Module back plates</small><h2>Small back plate / Slender / fore</h2><p>2.5 × 0.4 × 2.8 m · 2,260 triangles</p>
+<a href="img/refined_kit_05/details/kit3_backplate_small_slender_fore.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit3_backplate_small_slender_fore.webp">Shared scale</a>
+<code>kit3_backplate_small_slender_fore</code></div></article><article data-family="Module back plates" data-id="kit3_backplate_small_slender_aft" data-search="small back plate / slender / aft kit3_backplate_small_slender_aft module back plates">
+<a class="picture" href="img/refined_kit_05/details/kit3_backplate_small_slender_aft.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit3_backplate_small_slender_aft.webp" alt="Small back plate / Slender / aft"></a>
+<div class="info"><small>Module back plates</small><h2>Small back plate / Slender / aft</h2><p>2.5 × 0.3 × 2.8 m · 2,292 triangles</p>
+<a href="img/refined_kit_05/details/kit3_backplate_small_slender_aft.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit3_backplate_small_slender_aft.webp">Shared scale</a>
+<code>kit3_backplate_small_slender_aft</code></div></article><article data-family="Module back plates" data-id="kit3_backplate_small_compact_fore" data-search="small back plate / compact / shielded / fore kit3_backplate_small_compact_fore module back plates">
+<a class="picture" href="img/refined_kit_05/details/kit3_backplate_small_compact_fore.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit3_backplate_small_compact_fore.webp" alt="Small back plate / Compact / Shielded / fore"></a>
+<div class="info"><small>Module back plates</small><h2>Small back plate / Compact / Shielded / fore</h2><p>2.8 × 0.4 × 2.6 m · 2,260 triangles</p>
+<a href="img/refined_kit_05/details/kit3_backplate_small_compact_fore.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit3_backplate_small_compact_fore.webp">Shared scale</a>
+<code>kit3_backplate_small_compact_fore</code></div></article><article data-family="Module back plates" data-id="kit3_backplate_small_compact_aft" data-search="small back plate / compact / shielded / aft kit3_backplate_small_compact_aft module back plates">
+<a class="picture" href="img/refined_kit_05/details/kit3_backplate_small_compact_aft.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit3_backplate_small_compact_aft.webp" alt="Small back plate / Compact / Shielded / aft"></a>
+<div class="info"><small>Module back plates</small><h2>Small back plate / Compact / Shielded / aft</h2><p>2.8 × 0.3 × 2.6 m · 2,292 triangles</p>
+<a href="img/refined_kit_05/details/kit3_backplate_small_compact_aft.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit3_backplate_small_compact_aft.webp">Shared scale</a>
+<code>kit3_backplate_small_compact_aft</code></div></article><article data-family="Module back plates" data-id="kit3_backplate_small_wide_fore" data-search="small back plate / drum / laboratory / fore kit3_backplate_small_wide_fore module back plates">
+<a class="picture" href="img/refined_kit_05/details/kit3_backplate_small_wide_fore.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit3_backplate_small_wide_fore.webp" alt="Small back plate / Drum / Laboratory / fore"></a>
+<div class="info"><small>Module back plates</small><h2>Small back plate / Drum / Laboratory / fore</h2><p>2.9 × 0.4 × 2.6 m · 2,260 triangles</p>
+<a href="img/refined_kit_05/details/kit3_backplate_small_wide_fore.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit3_backplate_small_wide_fore.webp">Shared scale</a>
+<code>kit3_backplate_small_wide_fore</code></div></article><article data-family="Module back plates" data-id="kit3_backplate_small_wide_aft" data-search="small back plate / drum / laboratory / aft kit3_backplate_small_wide_aft module back plates">
+<a class="picture" href="img/refined_kit_05/details/kit3_backplate_small_wide_aft.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit3_backplate_small_wide_aft.webp" alt="Small back plate / Drum / Laboratory / aft"></a>
+<div class="info"><small>Module back plates</small><h2>Small back plate / Drum / Laboratory / aft</h2><p>2.9 × 0.3 × 2.6 m · 2,292 triangles</p>
+<a href="img/refined_kit_05/details/kit3_backplate_small_wide_aft.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit3_backplate_small_wide_aft.webp">Shared scale</a>
+<code>kit3_backplate_small_wide_aft</code></div></article><article data-family="Engine mounting connectors" data-id="kit3_engine_connector" data-search="engine mounting connector kit3_engine_connector engine mounting connectors">
+<a class="picture" href="img/refined_kit_05/details/kit3_engine_connector.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit3_engine_connector.webp" alt="Engine mounting connector"></a>
+<div class="info"><small>Engine mounting connectors</small><h2>Engine mounting connector</h2><p>3.6 × 0.9 × 4.4 m · 10,934 triangles</p>
+<a href="img/refined_kit_05/details/kit3_engine_connector.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit3_engine_connector.webp">Shared scale</a>
+<code>kit3_engine_connector</code></div></article><article data-family="Service drums / power bays" data-id="kit3_broad_drum" data-search="broad service drum kit3_broad_drum service drums / power bays">
+<a class="picture" href="img/refined_kit_05/details/kit3_broad_drum.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit3_broad_drum.webp" alt="Broad service drum"></a>
+<div class="info"><small>Service drums / power bays</small><h2>Broad service drum</h2><p>5.3 × 3.3 × 4.8 m · 11,008 triangles</p>
+<a href="img/refined_kit_05/details/kit3_broad_drum.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit3_broad_drum.webp">Shared scale</a>
+<code>kit3_broad_drum</code></div></article><article data-family="Service drums / power bays" data-id="kit3_cartridge_bay" data-search="radial cartridge bay kit3_cartridge_bay service drums / power bays">
+<a class="picture" href="img/refined_kit_05/details/kit3_cartridge_bay.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit3_cartridge_bay.webp" alt="Radial cartridge bay"></a>
+<div class="info"><small>Service drums / power bays</small><h2>Radial cartridge bay</h2><p>3.6 × 4.5 × 4.8 m · 10,784 triangles</p>
+<a href="img/refined_kit_05/details/kit3_cartridge_bay.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit3_cartridge_bay.webp">Shared scale</a>
+<code>kit3_cartridge_bay</code></div></article><article data-family="Service drums / power bays" data-id="kit3_battery_drums" data-search="four-drum battery bay kit3_battery_drums service drums / power bays">
+<a class="picture" href="img/refined_kit_05/details/kit3_battery_drums.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit3_battery_drums.webp" alt="Four-drum battery bay"></a>
+<div class="info"><small>Service drums / power bays</small><h2>Four-drum battery bay</h2><p>3.7 × 3.9 × 5.0 m · 11,216 triangles</p>
+<a href="img/refined_kit_05/details/kit3_battery_drums.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit3_battery_drums.webp">Shared scale</a>
+<code>kit3_battery_drums</code></div></article><article data-family="Service drums / power bays" data-id="kit3_power_core" data-search="ribbed power core kit3_power_core service drums / power bays">
+<a class="picture" href="img/refined_kit_05/details/kit3_power_core.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit3_power_core.webp" alt="Ribbed power core"></a>
+<div class="info"><small>Service drums / power bays</small><h2>Ribbed power core</h2><p>3.8 × 3.5 × 4.7 m · 13,776 triangles</p>
+<a href="img/refined_kit_05/details/kit3_power_core.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit3_power_core.webp">Shared scale</a>
+<code>kit3_power_core</code></div></article><article data-family="Large lattice trusses" data-id="kit3_truss_t" data-search="t truss junction kit3_truss_t large lattice trusses">
+<a class="picture" href="img/refined_kit_05/details/kit3_truss_t.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit3_truss_t.webp" alt="T truss junction"></a>
+<div class="info"><small>Large lattice trusses</small><h2>T truss junction</h2><p>5.7 × 8.1 × 3.9 m · 12,776 triangles</p>
+<a href="img/refined_kit_05/details/kit3_truss_t.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit3_truss_t.webp">Shared scale</a>
+<code>kit3_truss_t</code></div></article><article data-family="Large lattice trusses" data-id="kit3_truss_cross" data-search="cross truss junction kit3_truss_cross large lattice trusses">
+<a class="picture" href="img/refined_kit_05/details/kit3_truss_cross.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit3_truss_cross.webp" alt="Cross truss junction"></a>
+<div class="info"><small>Large lattice trusses</small><h2>Cross truss junction</h2><p>8.0 × 8.1 × 3.9 m · 16,896 triangles</p>
+<a href="img/refined_kit_05/details/kit3_truss_cross.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit3_truss_cross.webp">Shared scale</a>
+<code>kit3_truss_cross</code></div></article><article data-family="Large lattice trusses" data-id="kit3_truss_octagon" data-search="octagonal mounting truss kit3_truss_octagon large lattice trusses">
+<a class="picture" href="img/refined_kit_05/details/kit3_truss_octagon.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit3_truss_octagon.webp" alt="Octagonal mounting truss"></a>
+<div class="info"><small>Large lattice trusses</small><h2>Octagonal mounting truss</h2><p>6.9 × 3.3 × 6.9 m · 6,224 triangles</p>
+<a href="img/refined_kit_05/details/kit3_truss_octagon.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit3_truss_octagon.webp">Shared scale</a>
+<code>kit3_truss_octagon</code></div></article><article data-family="S1 trusses and fittings" data-id="kit3_truss_s1_t" data-search="s1 t truss fitting kit3_truss_s1_t s1 trusses and fittings">
+<a class="picture" href="img/refined_kit_05/details/kit3_truss_s1_t.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit3_truss_s1_t.webp" alt="S1 T truss fitting"></a>
+<div class="info"><small>S1 trusses and fittings</small><h2>S1 T truss fitting</h2><p>2.2 × 3.0 × 1.4 m · 1,008 triangles</p>
+<a href="img/refined_kit_05/details/kit3_truss_s1_t.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit3_truss_s1_t.webp">Shared scale</a>
+<code>kit3_truss_s1_t</code></div></article><article data-family="S1 trusses and fittings" data-id="kit3_truss_s1_cross" data-search="s1 cross truss fitting kit3_truss_s1_cross s1 trusses and fittings">
+<a class="picture" href="img/refined_kit_05/details/kit3_truss_s1_cross.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit3_truss_s1_cross.webp" alt="S1 cross truss fitting"></a>
+<div class="info"><small>S1 trusses and fittings</small><h2>S1 cross truss fitting</h2><p>3.0 × 3.0 × 1.4 m · 1,288 triangles</p>
+<a href="img/refined_kit_05/details/kit3_truss_s1_cross.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit3_truss_s1_cross.webp">Shared scale</a>
+<code>kit3_truss_s1_cross</code></div></article><article data-family="S1 trusses and fittings" data-id="kit3_truss_s1_octagon" data-search="s1 octagonal mounting truss kit3_truss_s1_octagon s1 trusses and fittings">
+<a class="picture" href="img/refined_kit_05/details/kit3_truss_s1_octagon.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit3_truss_s1_octagon.webp" alt="S1 octagonal mounting truss"></a>
+<div class="info"><small>S1 trusses and fittings</small><h2>S1 octagonal mounting truss</h2><p>5.3 × 2.4 × 5.3 m · 1,352 triangles</p>
+<a href="img/refined_kit_05/details/kit3_truss_s1_octagon.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit3_truss_s1_octagon.webp">Shared scale</a>
+<code>kit3_truss_s1_octagon</code></div></article><article data-family="Equipment bays" data-id="kit3_equipment_short" data-search="short ring-braced open bay kit3_equipment_short equipment bays">
+<a class="picture" href="img/refined_kit_05/details/kit3_equipment_short.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit3_equipment_short.webp" alt="Short ring-braced open bay"></a>
+<div class="info"><small>Equipment bays</small><h2>Short ring-braced open bay</h2><p>3.8 × 2.0 × 4.5 m · 18,520 triangles</p>
+<a href="img/refined_kit_05/details/kit3_equipment_short.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit3_equipment_short.webp">Shared scale</a>
+<code>kit3_equipment_short</code></div></article><article data-family="Surface mounts" data-id="kit3_radial_adapter" data-search="tank / cargo bay adapter kit3_radial_adapter surface mounts">
+<a class="picture" href="img/refined_kit_05/details/kit3_radial_adapter.webp"><img loading="lazy" src="img/refined_kit_05/scaled/kit3_radial_adapter.webp" alt="Tank / cargo bay adapter"></a>
+<div class="info"><small>Surface mounts</small><h2>Tank / cargo bay adapter</h2><p>0.4 × 0.4 × 0.2 m · 392 triangles</p>
+<a href="img/refined_kit_05/details/kit3_radial_adapter.webp">Detail</a> <a href="img/refined_kit_05/scaled/kit3_radial_adapter.webp">Shared scale</a>
+<code>kit3_radial_adapter</code></div></article></div><aside id="parts-detail" role="tooltip" hidden><img alt=""><h2></h2><p></p></aside><script>{let shared=true;const cards=[...document.querySelectorAll('article')],search=document.querySelector('#parts-search'),family=document.querySelector('#parts-family'),scale=document.querySelector('#parts-scale');
+const detail=document.querySelector('#parts-detail'),detailImage=detail.querySelector('img'),detailTitle=detail.querySelector('h2');
+let detailTimer,detailLink;
+function hideDetail(){clearTimeout(detailTimer);detail.hidden=true;if(detailLink)detailLink.removeAttribute('aria-describedby');detailLink=null;}
+function showDetail(card){
+ hideDetail();if(card.hidden)return;
+ const link=card.querySelector('.picture');
+ detailImage.src=link.href;detailTitle.textContent=card.querySelector('h2').textContent;detailImage.alt=detailTitle.textContent;
+ detail.querySelector('p').textContent=card.querySelector('.info p').textContent;
+ detail.hidden=false;detailLink=link;link.setAttribute('aria-describedby','parts-detail');
+ const anchor=card.getBoundingClientRect(),box=detail.getBoundingClientRect(),margin=12;
+ const left=anchor.left+(anchor.width-box.width)/2,top=anchor.top+(anchor.height-box.height)/2;
+ detail.style.left=Math.max(margin,Math.min(left,innerWidth-box.width-margin))+'px';
+ detail.style.top=Math.max(margin,Math.min(top,innerHeight-box.height-margin))+'px';
+}
+for(const card of cards){
+ card.addEventListener('pointerenter',event=>{if(event.pointerType==='touch')return;hideDetail();detailTimer=setTimeout(()=>showDetail(card),180);});
+ card.addEventListener('pointerleave',hideDetail);
+ const link=card.querySelector('.picture');
+ link.addEventListener('focus',()=>showDetail(card));link.addEventListener('blur',hideDetail);link.addEventListener('click',hideDetail);
+}
+document.addEventListener('keydown',event=>{if(event.key==='Escape')hideDetail();});
+window.addEventListener('scroll',hideDetail,{passive:true});window.addEventListener('resize',hideDetail);window.addEventListener('blur',hideDetail);
+function filter(){hideDetail();let n=0;for(const c of cards){c.hidden=!(c.dataset.search.includes(search.value.toLowerCase())&&(!family.value||c.dataset.family===family.value));if(!c.hidden)n++}document.querySelector('#parts-count').textContent=n+' / '+cards.length+' parts'}
+search.oninput=family.onchange=filter;scale.onclick=()=>{hideDetail();shared=!shared;scale.classList.toggle('active',shared);scale.textContent=shared?'Detail view':'Shared scale';for(const c of cards)c.querySelector('img').src='img/refined_kit_05/'+(shared?'scaled/':'details/')+c.dataset.id+'.webp'};filter();}</script></section></main>
 </div>
 <div id="lb" hidden role="dialog" aria-modal="true" aria-label="Image viewer">
   <div class="top">
@@ -111,7 +617,7 @@ main { padding: 8px 24px 80px; min-width: 0; }
   <div class="bottom"><span id="lb-cap"></span><span id="lb-n"></span></div>
 </div>
 <script>
-const DATA = {"groups": [{"name": "Ship design ideas", "collections": [{"id": "design_fleet_09", "dir": "design_fleet_09", "status": "study", "title": "Ship design ideas / Refined fleet", "desc": "Five orbital ship concepts built from 43 refined components: Swift (compact courier), Wayfarer (long-range survey ship), Dray (container freighter), Cistern (propellant tender) and Forge (mobile workshop). Front, side and plan views of each, a shared-scale lineup, and close-ups of the solar, RCS and antenna mounts.", "images": [{"src": "img/design_fleet_09/lineup.webp", "thumb": "thumb/design_fleet_09/lineup.webp", "caption": "Shared-scale lineup"}, {"src": "img/design_fleet_09/overview.webp", "thumb": "thumb/design_fleet_09/overview.webp", "caption": "Fleet overview"}, {"src": "img/design_fleet_09/renders/swift_hero.webp", "thumb": "thumb/design_fleet_09/renders/swift_hero.webp", "caption": "Swift / front"}, {"src": "img/design_fleet_09/renders/swift_side.webp", "thumb": "thumb/design_fleet_09/renders/swift_side.webp", "caption": "Swift / side"}, {"src": "img/design_fleet_09/renders/swift_plan.webp", "thumb": "thumb/design_fleet_09/renders/swift_plan.webp", "caption": "Swift / plan"}, {"src": "img/design_fleet_09/renders/wayfarer_hero.webp", "thumb": "thumb/design_fleet_09/renders/wayfarer_hero.webp", "caption": "Wayfarer / front"}, {"src": "img/design_fleet_09/renders/wayfarer_side.webp", "thumb": "thumb/design_fleet_09/renders/wayfarer_side.webp", "caption": "Wayfarer / side"}, {"src": "img/design_fleet_09/renders/wayfarer_plan.webp", "thumb": "thumb/design_fleet_09/renders/wayfarer_plan.webp", "caption": "Wayfarer / plan"}, {"src": "img/design_fleet_09/renders/dray_hero.webp", "thumb": "thumb/design_fleet_09/renders/dray_hero.webp", "caption": "Dray / front"}, {"src": "img/design_fleet_09/renders/dray_side.webp", "thumb": "thumb/design_fleet_09/renders/dray_side.webp", "caption": "Dray / side"}, {"src": "img/design_fleet_09/renders/dray_plan.webp", "thumb": "thumb/design_fleet_09/renders/dray_plan.webp", "caption": "Dray / plan"}, {"src": "img/design_fleet_09/renders/dray_antenna.webp", "thumb": "thumb/design_fleet_09/renders/dray_antenna.webp", "caption": "Dray / antenna mount"}, {"src": "img/design_fleet_09/renders/cistern_hero.webp", "thumb": "thumb/design_fleet_09/renders/cistern_hero.webp", "caption": "Cistern / front"}, {"src": "img/design_fleet_09/renders/cistern_side.webp", "thumb": "thumb/design_fleet_09/renders/cistern_side.webp", "caption": "Cistern / side"}, {"src": "img/design_fleet_09/renders/cistern_plan.webp", "thumb": "thumb/design_fleet_09/renders/cistern_plan.webp", "caption": "Cistern / plan"}, {"src": "img/design_fleet_09/renders/cistern_antenna.webp", "thumb": "thumb/design_fleet_09/renders/cistern_antenna.webp", "caption": "Cistern / antenna mount"}, {"src": "img/design_fleet_09/renders/forge_hero.webp", "thumb": "thumb/design_fleet_09/renders/forge_hero.webp", "caption": "Forge / front"}, {"src": "img/design_fleet_09/renders/forge_side.webp", "thumb": "thumb/design_fleet_09/renders/forge_side.webp", "caption": "Forge / side"}, {"src": "img/design_fleet_09/renders/forge_plan.webp", "thumb": "thumb/design_fleet_09/renders/forge_plan.webp", "caption": "Forge / plan"}, {"src": "img/design_fleet_09/renders/solar_mount.webp", "thumb": "thumb/design_fleet_09/renders/solar_mount.webp", "caption": "Solar panel mount"}, {"src": "img/design_fleet_09/renders/rcs_mount.webp", "thumb": "thumb/design_fleet_09/renders/rcs_mount.webp", "caption": "RCS cluster mount"}]}]}], "status": {"production": "In production", "accepted": "Accepted", "study": "Study", "pending": "Review pending", "rejected": "Rejected", "legacy": "Superseded"}, "heading": "Art catalog", "links": [{"href": "components.html", "label": "Components"}, {"href": "archive.html", "label": "Earlier studies"}]};
+const DATA = {"groups": [{"name": "Ship design ideas", "collections": [{"id": "design_fleet_09", "dir": "design_fleet_09", "status": "study", "title": "Ship design ideas / Refined fleet", "desc": "Five orbital ship concepts built from 43 refined components: Swift (compact courier), Wayfarer (long-range survey ship), Dray (container freighter), Cistern (propellant tender) and Forge (mobile workshop). Front, side and plan views of each, a shared-scale lineup, and close-ups of the solar, RCS and antenna mounts.", "images": [{"src": "img/design_fleet_09/lineup.webp", "thumb": "thumb/design_fleet_09/lineup.webp", "caption": "Shared-scale lineup"}, {"src": "img/design_fleet_09/overview.webp", "thumb": "thumb/design_fleet_09/overview.webp", "caption": "Fleet overview"}, {"src": "img/design_fleet_09/renders/swift_hero.webp", "thumb": "thumb/design_fleet_09/renders/swift_hero.webp", "caption": "Swift / front"}, {"src": "img/design_fleet_09/renders/swift_side.webp", "thumb": "thumb/design_fleet_09/renders/swift_side.webp", "caption": "Swift / side"}, {"src": "img/design_fleet_09/renders/swift_plan.webp", "thumb": "thumb/design_fleet_09/renders/swift_plan.webp", "caption": "Swift / plan"}, {"src": "img/design_fleet_09/renders/wayfarer_hero.webp", "thumb": "thumb/design_fleet_09/renders/wayfarer_hero.webp", "caption": "Wayfarer / front"}, {"src": "img/design_fleet_09/renders/wayfarer_side.webp", "thumb": "thumb/design_fleet_09/renders/wayfarer_side.webp", "caption": "Wayfarer / side"}, {"src": "img/design_fleet_09/renders/wayfarer_plan.webp", "thumb": "thumb/design_fleet_09/renders/wayfarer_plan.webp", "caption": "Wayfarer / plan"}, {"src": "img/design_fleet_09/renders/dray_hero.webp", "thumb": "thumb/design_fleet_09/renders/dray_hero.webp", "caption": "Dray / front"}, {"src": "img/design_fleet_09/renders/dray_side.webp", "thumb": "thumb/design_fleet_09/renders/dray_side.webp", "caption": "Dray / side"}, {"src": "img/design_fleet_09/renders/dray_plan.webp", "thumb": "thumb/design_fleet_09/renders/dray_plan.webp", "caption": "Dray / plan"}, {"src": "img/design_fleet_09/renders/dray_antenna.webp", "thumb": "thumb/design_fleet_09/renders/dray_antenna.webp", "caption": "Dray / antenna mount"}, {"src": "img/design_fleet_09/renders/cistern_hero.webp", "thumb": "thumb/design_fleet_09/renders/cistern_hero.webp", "caption": "Cistern / front"}, {"src": "img/design_fleet_09/renders/cistern_side.webp", "thumb": "thumb/design_fleet_09/renders/cistern_side.webp", "caption": "Cistern / side"}, {"src": "img/design_fleet_09/renders/cistern_plan.webp", "thumb": "thumb/design_fleet_09/renders/cistern_plan.webp", "caption": "Cistern / plan"}, {"src": "img/design_fleet_09/renders/cistern_antenna.webp", "thumb": "thumb/design_fleet_09/renders/cistern_antenna.webp", "caption": "Cistern / antenna mount"}, {"src": "img/design_fleet_09/renders/forge_hero.webp", "thumb": "thumb/design_fleet_09/renders/forge_hero.webp", "caption": "Forge / front"}, {"src": "img/design_fleet_09/renders/forge_side.webp", "thumb": "thumb/design_fleet_09/renders/forge_side.webp", "caption": "Forge / side"}, {"src": "img/design_fleet_09/renders/forge_plan.webp", "thumb": "thumb/design_fleet_09/renders/forge_plan.webp", "caption": "Forge / plan"}, {"src": "img/design_fleet_09/renders/solar_mount.webp", "thumb": "thumb/design_fleet_09/renders/solar_mount.webp", "caption": "Solar panel mount"}, {"src": "img/design_fleet_09/renders/rcs_mount.webp", "thumb": "thumb/design_fleet_09/renders/rcs_mount.webp", "caption": "RCS cluster mount"}]}]}], "status": {"production": "In production", "accepted": "Accepted", "study": "Study", "pending": "Review pending", "rejected": "Rejected", "legacy": "Superseded"}, "heading": "Art catalog", "links": [{"href": "archive.html", "label": "Earlier studies"}]};
 DATA.groups.forEach(g => g.collections.forEach(c => { c.group = g.name; }));
 document.title = `Azurite ${DATA.heading}`;
 document.getElementById("heading").textContent = `AZURITE / ${DATA.heading.toUpperCase()}`;
@@ -167,10 +673,11 @@ function render() {
       links += `<a href="#${c.id}">${esc(c.title)}</a>`;
     }
     if (body) {
-      main.insertAdjacentHTML("beforeend", `<div class="group"><h2>${esc(g.name)}</h2>${body}</div>`);
+      $("groups").insertAdjacentHTML("beforeend", `<div class="group"><h2>${esc(g.name)}</h2>${body}</div>`);
       nav_html += `<h3>${esc(g.name)}</h3>${links}`;
     }
   }
+  if ($("components")) nav_html += `<h3>Components</h3><a href="#components">Refined ship parts</a>`;
   nav.innerHTML = DATA.links.map(l => `<a class="page-link" href="${l.href}">${esc(l.label)} →</a>`).join("") + nav_html;
   $("empty").classList.toggle("hidden", shown > 0);
   $("count").textContent = `${shown} images`;
